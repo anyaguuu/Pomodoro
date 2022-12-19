@@ -1,5 +1,6 @@
 import styled from "styled-components";
-import React from "react";
+import Box from "@material-ui/core/Box";
+
 
 export const Page = styled.div`
     display: flex;
@@ -21,14 +22,13 @@ export const Title = styled.div`
     font-size: 7em;
 `
 
-// export const styles = {
-//     title: {
-//         fontFamily: "-apple-system",
-//         // fontSize: "10rem",
-//         // fontWeight: 1.5,
-//         // lineHeight: 1.5,
-//         // color: "#FFFFFF",
-//         // backgroundColor: "#000000",
-//         // padding: "2em",
-//     }
-// };
+export const TimerBox = styled(Box)({
+    height: "10vh",
+    width: "20vw",
+    justifyContent: "center",
+    alignItmes: "center",
+    display: "flex",
+    backgroundColor: "white",
+})
+
+// export const styles
