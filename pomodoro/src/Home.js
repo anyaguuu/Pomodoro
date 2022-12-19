@@ -86,9 +86,6 @@ export default function Home() {
   }
 
   const pauseTimer = () => {
-    // let currState = timer;
-    // console.log(currState);
-    // setTimer(currState);
   }
 
   return(
