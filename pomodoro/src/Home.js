@@ -2,6 +2,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Page,TimerBox,Title, ButtonBox } from './HomeStyles';
 import React, {useState, useRef, useEffect} from "react";
+import useSound from 'use-sound';
 
 export default function Home() {
   const Ref = useRef(null);
@@ -19,16 +20,20 @@ export default function Home() {
 
   const [timer, setTimer] = useState('00:00:00'); // the state for timer
 
+  const [playBell] = useSound('/sounds/bell.mp3',{volume:0.25});
+  console.log(playBell);
+
   const getTimeRemaining = (e) => {
     const total = Date.parse(e) - Date.parse(new Date());
     const seconds = Math.floor((total / 1000) % 60);
     const minutes = Math.floor((total / 1000 / 60) % 60);
     const hours = Math.floor((total / 1000 / 60 / 60) % 24);
 
-    // time is up
+    // time is up -- show toast and play soun
     if (seconds == 0 && minutes == 0 && hours == 0) {
         showToastMessage("Time's up!");
         <ToastContainer/>
+        playBell();
     }
     return {
       total, hours, minutes, seconds
@@ -37,7 +42,6 @@ export default function Home() {
 
   const startTimer = (e) => {
     let {total, hours, minutes, seconds} = getTimeRemaining(e);
-    console.log("total: " + total);
     if (total >= 0) {
       // update the timer
       // check if less than 10 -- add 0 to beginning of variable
@@ -50,7 +54,7 @@ export default function Home() {
   }
 
   const clearTimer = (e) => {
-    const minStr = startMin <= 9 ? '0'+startMin : startMin; // TODO: fix this
+    const minStr = startMin <= 1 ? '00' : startMin<=9 ? '0'+startMin : startMin; // TODO: fix this
     setTimer('00:'+minStr+':00'); // where it starts from
     // If you try to remove this line the 
         // updating of timer Variable will be
@@ -86,10 +90,6 @@ export default function Home() {
     // setTimer(currState);
   }
 
-  // const setRunningTrue = () => {
-  //   setRunning(true);
-  // }
-
   return(
     <Page>
       <Title> Pomodoro </Title>
@@ -98,7 +98,7 @@ export default function Home() {
         onClickReset
         }>Start timer</ButtonBox>
       <ToastContainer/>
-      <ButtonBox onClick={pauseTimer}>Pause</ButtonBox>
+      <ButtonBox onClick={playBell}>Pause</ButtonBox>
       <ToastContainer/>
     </Page>
   )

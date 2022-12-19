@@ -1,7 +1,5 @@
 import styled from "styled-components";
-import Box from "@material-ui/core/Box";
-import Button from "@material-ui/core/Button";
-
+import {Box,Button} from "@material-ui/core";
 
 export const Page = styled.div`
     display: flex;
@@ -17,7 +15,7 @@ export const Title = styled.div`
     align-items: center;
     font-family: Arial;
     color: purple;
-    padding: 12vh 0px 0px 0px;
+    padding: 5vh 0px 5vh 0px;
     font-family: Josefin Sans;
     font-weight: bold;
     font-size: 7em;
@@ -34,14 +32,12 @@ export const TimerBox = styled(Box)({
     borderRadius: "10px",
 })
 
-export const ButtonBox = styled(Button)({
-    fontFamily: "Josefin Sans",
-    fontSize: "2vh",
-    // background: "#2075D8",
-    backgroundColor: "white",
-    color: "white",
-    borderRadius: "2vw",
-    width: "10vw",
-    height: "10vh",
-    textTransform: "none",
-})
+export const ButtonBox = styled.button`
+    background-color: white;
+    color: black;
+    font-size: 20px;
+    border-radius: 5px;
+    height: 5vh;
+    width: 10vw;
+    margin-top: 2vh;
+=`
