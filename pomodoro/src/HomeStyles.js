@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Box from "@material-ui/core/Box";
+import Button from "@material-ui/core/Button";
 
 
 export const Page = styled.div`
@@ -23,12 +24,24 @@ export const Title = styled.div`
 `
 
 export const TimerBox = styled(Box)({
-    height: "10vh",
-    width: "20vw",
+    height: "21vh",
+    width: "42vw",
     justifyContent: "center",
     alignItmes: "center",
     display: "flex",
     backgroundColor: "white",
+    fontSize: "9em",
+    borderRadius: "10px",
 })
 
-// export const styles
+export const ButtonBox = styled(Button)({
+    fontFamily: "Josefin Sans",
+    fontSize: "2vh",
+    // background: "#2075D8",
+    backgroundColor: "white",
+    color: "white",
+    borderRadius: "2vw",
+    width: "10vw",
+    height: "10vh",
+    textTransform: "none",
+})
