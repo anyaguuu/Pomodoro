@@ -19,6 +19,7 @@ export default function Home() {
   }
 
   const [timer, setTimer] = useState('00:00:00'); // the state for timer
+  const [running, setRunning] = useState(false);
 
   const [playBell] = useSound('/sounds/bell.mp3',{volume:0.25});
   console.log(playBell);
@@ -98,7 +99,10 @@ export default function Home() {
         onClickReset
         }>Start timer</ButtonBox>
       <ToastContainer/>
-      <ButtonBox onClick={playBell}>Pause</ButtonBox>
+      <ButtonBox onClick={{
+        pauseTimer,
+        playBell
+        }}>Pause</ButtonBox>
       <ToastContainer/>
     </Page>
   )
