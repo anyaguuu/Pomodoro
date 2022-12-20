@@ -14,9 +14,9 @@ export default function Home () {
   const [duration, setDuration] = useState(START_DURATION);
   const [isRunning, setIsRunning] = useState(false);
 
-  const startHandler = (numMin) => {
-    console.log("numMin: " + numMin);
-    let newDuration = parseInt(START_SECONDS,10) + 60 * parseInt(numMin,10);
+  const startHandler = () => {
+    // console.log("numMin: " + numMin);
+    let newDuration = parseInt(START_SECONDS,10) + 60 * parseInt(START_WORK_MINUTES,10); // problem?
     setDuration(newDuration);
     // setMinutes(60 * 5);
     // setSeconds(0);
@@ -31,7 +31,7 @@ export default function Home () {
  
   const resetHandler = () => {
     // reset timers
-    setMinutes(START_WORK_MINUTES);
+    setMinutes(START_WORK_MINUTES); // TODO: change this
     setSeconds(START_SECONDS);
     setIsRunning(false);
     setIsStop(false);
@@ -76,13 +76,13 @@ export default function Home () {
       <TimerBox>{currentMinutes}:{currentSeconds}</TimerBox>
       <OuterButtonBox>
       {!isRunning && !isStop && (
-        <ButtonBox onClick={startHandler(START_WORK_MINUTES)}disabled={!(!isRunning && !isStop)}>Start Pomodoro</ButtonBox>
+        <ButtonBox onClick={startHandler}>Start Pomodoro</ButtonBox>
       )}
       {isRunning && (
-        <ButtonBox onClick={stopHandler} disabled={!isRunning}>Stop</ButtonBox>
+        <ButtonBox onClick={stopHandler}>Stop</ButtonBox>
       )}
       {isStop && (
-        <ButtonBox onClick={resumeHandler}disabled = {!isStop}>Resume</ButtonBox>
+        <ButtonBox onClick={resumeHandler}>Resume</ButtonBox>
       )}
       {/* {!isRunning && !isStop && (
         <ButtonBox onClick={startHandler(START_SHORT_BREAK_MINUTES)} numMin = {START_SHORT_BREAK_MINUTES}>Start Short Break</ButtonBox>
