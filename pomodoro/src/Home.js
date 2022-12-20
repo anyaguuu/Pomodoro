@@ -2,6 +2,7 @@ import {Page, Title, TimerBox, OuterButtonBox, ButtonBox} from "./HomeStyles";
 import React, {useState, useEffect, Fragment} from 'react';
 
 const START_WORK_MINUTES = '25';
+const START_SHORT_BREAK_MINUTES = '5';
 const START_SECONDS = '00';
 const START_DURATION = 10;
 
@@ -13,8 +14,9 @@ export default function Home () {
   const [duration, setDuration] = useState(START_DURATION);
   const [isRunning, setIsRunning] = useState(false);
 
-  const startHandler = () => {
-    let newDuration = parseInt(START_SECONDS,10) + 60 * parseInt(START_WORK_MINUTES,10);
+  const startHandler = (props) => {
+    let numMin = props.numMin;
+    let newDuration = parseInt(START_SECONDS,10) + 60 * parseInt(numMin,10);
     setDuration(newDuration);
     // setMinutes(60 * 5);
     // setSeconds(0);
@@ -28,7 +30,7 @@ export default function Home () {
   };
  
   const resetHandler = () => {
-    // reset timer
+    // reset timers
     setMinutes(START_WORK_MINUTES);
     setSeconds(START_SECONDS);
     setIsRunning(false);
@@ -74,15 +76,17 @@ export default function Home () {
       <TimerBox>{currentMinutes}:{currentSeconds}</TimerBox>
       <OuterButtonBox>
       {!isRunning && !isStop && (
-        <ButtonBox onClick={startHandler}>Start Pomodoro</ButtonBox>
+        <ButtonBox onClick={startHandler} numMin = {START_WORK_MINUTES} disabled={!(!isRunning && !isStop)}>Start Pomodoro</ButtonBox>
       )}
       {isRunning && (
-        <ButtonBox onClick={stopHandler}>Stop</ButtonBox>
+        <ButtonBox onClick={stopHandler} disabled={!isRunning}>Stop</ButtonBox>
       )}
       {isStop && (
-        <ButtonBox onClick={resumeHandler}>Resume</ButtonBox>
+        <ButtonBox onClick={resumeHandler}disabled = {!isStop}>Resume</ButtonBox>
       )}
-      <ButtonBox>Start Short Break</ButtonBox>
+      {true && true && (
+        <ButtonBox onClick={startHandler} numMin = {START_SHORT_BREAK_MINUTES}>Start Short Break</ButtonBox>
+      )}
       </OuterButtonBox>
       <OuterButtonBox>
         <ButtonBox onClick={resetHandler} disabled={!isRunning&&!isStop}>Reset</ButtonBox> 
