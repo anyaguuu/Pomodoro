@@ -84,9 +84,9 @@ export default function Home () {
       {isStop && (
         <ButtonBox onClick={resumeHandler}disabled = {!isStop}>Resume</ButtonBox>
       )}
-      {!isRunning && !isStop && (
+      {/* {!isRunning && !isStop && (
         <ButtonBox onClick={startHandler(START_SHORT_BREAK_MINUTES)} numMin = {START_SHORT_BREAK_MINUTES}>Start Short Break</ButtonBox>
-      )}
+      )} */}
       </OuterButtonBox>
       <OuterButtonBox>
         <ButtonBox onClick={resetHandler} disabled={!isRunning&&!isStop}>Reset</ButtonBox> 
