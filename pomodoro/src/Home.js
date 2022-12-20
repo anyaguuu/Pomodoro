@@ -98,14 +98,14 @@ export default function Home () {
       )}
 
       {!isBreak && (
-        <ButtonBox onClick={() => {startHandler(START_SHORT_BREAK_MINUTES)}}>Start Short Break</ButtonBox>
+        <ButtonBox onClick={() => {startHandler(START_SHORT_BREAK_MINUTES)}} disabled={(isWorking || isBreak)}>Start Short Break</ButtonBox>
       )}
       {isBreak && (
-        <ButtonBox onClick={() => {startHandler(START_SHORT_BREAK_MINUTES)}}>Stop Short Break</ButtonBox>
+        <ButtonBox onClick={stopHandler} disabled={!isBreak}>Stop Short Break</ButtonBox>
       )}
       </OuterButtonBox>
       <OuterButtonBox>
-        <ButtonBox onClick={resetHandler} disabled={!isWorking&&!isStop}>Reset</ButtonBox> 
+        <ButtonBox onClick={resetHandler} disabled={!isWorking&&!isStop&&!isBreak}>Reset</ButtonBox> 
       </OuterButtonBox>
     </Fragment>
     </Page>
