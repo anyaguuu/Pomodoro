@@ -24,12 +24,14 @@ export default function Home () {
     // setMinutes(60 * 5);
     // setSeconds(0);
     setIsWorking(true);
+    setisBreak(false);
   };
 
   const stopHandler = () => {
     // stop timer
     setIsStop(true);
     setIsWorking(false);
+    setisBreak(false);
   };
  
   const resetHandler = () => {
@@ -38,6 +40,7 @@ export default function Home () {
     setSeconds(START_SECONDS);
     setIsWorking(false);
     setIsStop(false);
+    setisBreak(false);
     setDuration(START_DURATION);
   };
 
