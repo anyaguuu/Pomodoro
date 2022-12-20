@@ -71,7 +71,7 @@ export default function Home () {
   return (
   <div>
     <Page>
-    <Fragment>
+    <Fragment> 
       <Title>Pomodoro</Title>
       <TimerBox>{currentMinutes}:{currentSeconds}</TimerBox>
       <OuterButtonBox>
