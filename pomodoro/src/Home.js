@@ -14,8 +14,7 @@ export default function Home () {
   const [duration, setDuration] = useState(START_DURATION);
   const [isRunning, setIsRunning] = useState(false);
 
-  const startHandler = (props) => {
-    const numMin = props.numMin;
+  const startHandler = (numMin) => {
     console.log("numMin: " + numMin);
     let newDuration = parseInt(START_SECONDS,10) + 60 * parseInt(numMin,10);
     setDuration(newDuration);
@@ -77,7 +76,7 @@ export default function Home () {
       <TimerBox>{currentMinutes}:{currentSeconds}</TimerBox>
       <OuterButtonBox>
       {!isRunning && !isStop && (
-        <ButtonBox onClick={startHandler} numMin = {START_WORK_MINUTES} disabled={!(!isRunning && !isStop)}>Start Pomodoro</ButtonBox>
+        <ButtonBox onClick={startHandler(START_WORK_MINUTES)}disabled={!(!isRunning && !isStop)}>Start Pomodoro</ButtonBox>
       )}
       {isRunning && (
         <ButtonBox onClick={stopHandler} disabled={!isRunning}>Stop</ButtonBox>
@@ -85,8 +84,8 @@ export default function Home () {
       {isStop && (
         <ButtonBox onClick={resumeHandler}disabled = {!isStop}>Resume</ButtonBox>
       )}
-      {true && true && (
-        <ButtonBox onClick={startHandler} numMin = {START_SHORT_BREAK_MINUTES}>Start Short Break</ButtonBox>
+      {!isRunning && !isStop && (
+        <ButtonBox onClick={startHandler(START_SHORT_BREAK_MINUTES)} numMin = {START_SHORT_BREAK_MINUTES}>Start Short Break</ButtonBox>
       )}
       </OuterButtonBox>
       <OuterButtonBox>
