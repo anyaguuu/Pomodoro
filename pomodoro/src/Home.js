@@ -16,8 +16,9 @@ export default function Home () {
   const [isRunning, setIsRunning] = useState(false);
 
   const startHandler = (numMin) => {
-    console.log("numMin: " + JSON.stringify(numMin));
-    let newDuration = parseInt(START_SECONDS,10) + 60 * parseInt(JSON.stringify(numMin),10); 
+    // console.log("numMin: " + parseInt(JSON.stringify(numMin),10));
+    let minInt = parseInt(numMin);
+    let newDuration = parseInt(START_SECONDS,10) + 60 * minInt; 
     setDuration(newDuration);
     // setMinutes(60 * 5);
     // setSeconds(0);
