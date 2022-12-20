@@ -26,7 +26,7 @@ export default function Home () {
     setIsStop(true);
     setIsRunning(false);
   };
-
+ 
   const resetHandler = () => {
     // reset timer
     setMinutes(START_MINUTES);
