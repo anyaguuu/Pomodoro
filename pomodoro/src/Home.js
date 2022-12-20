@@ -1,106 +1,91 @@
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { Page,TimerBox,Title, ButtonBox } from './HomeStyles';
-import React, {useState, useRef, useEffect} from "react";
-import useSound from 'use-sound';
+import {Page, Title, TimerBox, ButtonBox} from "./HomeStyles";
+import React, {useState, useEffect, Fragment} from 'react';
 
-export default function Home() {
-  const Ref = useRef(null);
+const START_MINUTES = '05';
+const START_SECONDS = '00';
+const START_DURATION = 10;
 
-  const startMin = .1; // number of minutes for pomodoro timer
 
-  const showToastMessage = (message) => {
-    toast.info(message,{
-      position: toast.POSITION.TOP_CENTER,
-      autoClose: 1000,
-      hideProgressBar: true,
-      dragable: true,
-    });
+export default function Home () {
+  const [currentMinutes, setMinutes] = useState(START_MINUTES);
+  const [currentSeconds, setSeconds] = useState(START_SECONDS);
+  const [isStop, setIsStop] = useState(false);
+  const [duration, setDuration] = useState(START_DURATION);
+  const [isRunning, setIsRunning] = useState(false);
+
+  const startHandler = () => {
+    let newDuration = parseInt(START_SECONDS,10) + 60 * parseInt(START_MINUTES,10);
+    setDuration(newDuration);
+    // setMinutes(60 * 5);
+    // setSeconds(0);
+    setIsRunning(true);
+  };
+
+  const stopHandler = () => {
+    // stop timer
+    setIsStop(true);
+    setIsRunning(false);
+  };
+
+  const resetHandler = () => {
+    // reset timer
+    setMinutes(START_MINUTES);
+    setSeconds(START_SECONDS);
+    setIsRunning(false);
+    setIsStop(false);
+    setDuration(START_DURATION);
+  };
+
+  const resumeHandler = () => {
+    let newDuration = parseInt(currentMinutes, 10) * 60 + parseInt(currentSeconds, 10);
+    setDuration(newDuration);
+
+    setIsRunning(true);
+    setIsStop(false);
   }
 
-  const [timer, setTimer] = useState('00:00:00'); // the state for timer
-  const [running, setRunning] = useState(false);
-
-  const [playBell] = useSound('/sounds/bell.mp3',{volume:0.25});
-  console.log(playBell);
-
-  const getTimeRemaining = (e) => {
-    const total = Date.parse(e) - Date.parse(new Date());
-    const seconds = Math.floor((total / 1000) % 60);
-    const minutes = Math.floor((total / 1000 / 60) % 60);
-    const hours = Math.floor((total / 1000 / 60 / 60) % 24);
-
-    // time is up -- show toast and play soun
-    if (seconds == 0 && minutes == 0 && hours == 0) {
-        showToastMessage("Time's up!");
-        <ToastContainer/>
-        playBell();
-    }
-    return {
-      total, hours, minutes, seconds
-    }
-  }
-
-  const startTimer = (e) => {
-    let {total, hours, minutes, seconds} = getTimeRemaining(e);
-    if (total >= 0) {
-      // update the timer
-      // check if less than 10 -- add 0 to beginning of variable
-      setTimer(
-        (hours > 0 ? hours : '0' + hours) + ':' +
-        (minutes > 9 ? minutes : '0' + minutes) + ':'
-        + (seconds > 9 ? seconds: '0' + seconds)
-      )
-    }
-  }
-
-  const clearTimer = (e) => {
-    const minStr = startMin <= 1 ? '00' : startMin<=9 ? '0'+startMin : startMin; // TODO: fix this
-    setTimer('00:'+minStr+':00'); // where it starts from
-    // If you try to remove this line the 
-        // updating of timer Variable will be
-        // after 1000ms or 1sec
-        if (Ref.current) clearInterval(Ref.current);
-        const id = setInterval(() => {
-            startTimer(e);
-        }, 1000)
-        Ref.current = id;
-  }
-
-  const getDeadTime = () => {
-    let deadline = new Date();
-    // adjust if you want to add more time
-    deadline.setSeconds(deadline.getSeconds() + 60*startMin);
-    return deadline;
-  }
-
-  // use this so timer will start asap
   useEffect(() => {
-    clearTimer(getDeadTime());
-  }, []);
-  
-  const onClickReset =() => {
-    clearTimer(getDeadTime());
-    showToastMessage('Timer started');
-    <ToastContainer/> // TODO: fix
-  }
+    if (isRunning === true) {
+      let timer = duration;
+      var minutes, seconds;
+      const interval = setInterval(function () {
+        if (--timer <= 0) {
+          resetHandler();
+        } else {
+          minutes = parseInt(timer / 60, 10);
+          seconds = parseInt(timer % 60, 10);
 
-  const pauseTimer = () => {
-  }
+          minutes = minutes < 10 ? '0' + minutes : minutes;
+          seconds = seconds < 10 ? '0' + seconds : seconds;
 
-  return(
+          setMinutes(minutes);
+          setSeconds(seconds);
+        }
+      }, 1000);
+      return () => clearInterval(interval);
+    }
+  }, [isRunning]); // dependency -- only runs when dependency changes
+
+  return (
+  <div>
     <Page>
-      <Title> Pomodoro </Title>
-      <TimerBox>{timer}</TimerBox>
-      <ButtonBox onClick={
-        onClickReset
-        }>Start timer</ButtonBox>
-      <ToastContainer/>
-      <ButtonBox onClick={{
-        pauseTimer,
-        playBell
-        }}>Pause</ButtonBox>
-      <ToastContainer/>
+    <Fragment>
+      <Title>Pomodoro</Title>
+      <TimerBox>{currentMinutes}:{currentSeconds}</TimerBox>
+      {!isRunning && !isStop && (
+        <ButtonBox onClick={startHandler}>Start</ButtonBox>
+      )}
+      {isRunning && (
+        <ButtonBox onClick={stopHandler}>Stop</ButtonBox>
+      )}
+      {isStop && (
+        <ButtonBox onClick={resumeHandler}>Resume</ButtonBox>
+      )}
+
+      <ButtonBox onClick={resetHandler} disabled={!isRunning&&!isStop}>Reset</ButtonBox> 
+    </Fragment>
     </Page>
+  </div>
+
   )
 }
