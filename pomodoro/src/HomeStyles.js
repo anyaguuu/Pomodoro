@@ -30,7 +30,15 @@ export const TimerBox = styled(Box)({
     backgroundColor: "white",
     fontSize: "9em",
     borderRadius: "10px",
-})
+    border: "2px solid",
+    borderColor: "black",
+});
+
+export const OuterButtonBox = styled(Box)({
+    height: "10vh",
+    width: "30vw",
+    marginTop: "3vh",
+});
 
 export const ButtonBox = styled.button`
     background-color: white;
@@ -38,6 +46,6 @@ export const ButtonBox = styled.button`
     font-size: 20px;
     border-radius: 1vw;
     height: 5vh;
-    width: 10vw;
+    width: 15vw;
     margin-top: 2vh;
-=`
+`
