@@ -36,7 +36,7 @@ export const ButtonBox = styled.button`
     background-color: white;
     color: black;
     font-size: 20px;
-    border-radius: 5px;
+    border-radius: 1vw;
     height: 5vh;
     width: 10vw;
     margin-top: 2vh;
