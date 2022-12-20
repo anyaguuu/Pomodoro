@@ -44,15 +44,21 @@ export default function Home () {
     setDuration(START_DURATION);
   };
 
-  const resumeHandler = () => {
+  const resumeHandler = (isBreak) => {
     let newDuration = parseInt(currentMinutes, 10) * 60 + parseInt(currentSeconds, 10);
     setDuration(newDuration);
 
-    setIsWorking(true);
-    setIsStop(false);
+    if (!isBreak) { // working
+      setIsWorking(true);
+      setIsStop(false);
+    }
+    else { // on break
+      setisBreak(true); // prob unnecessary
+      setIsStop(false);
+    }
   }
 
-  useEffect(() => {
+  useEffect(() => { // TODO: prob have to change this part
     if (isWorking === true) {
       let timer = duration;
       var minutes, seconds;
@@ -72,7 +78,7 @@ export default function Home () {
       }, 1000);
       return () => clearInterval(interval);
     }
-  }, [isWorking]); // dependency -- only runs when dependency changes
+  }, [isWorking,isBreak]); // dependency -- only runs when dependency changes
 
   return (
   <div>
@@ -83,17 +89,20 @@ export default function Home () {
       <OuterButtonBox>
       {!isWorking && !isStop && (
         <ButtonBox onClick={() => {startHandler(START_WORK_MINUTES)}}>Start Pomodoro</ButtonBox>
-        // <ButtonBox onClick = {startHandler(START_WORK_MINUTES)}>Start Pomodoro</ButtonBox>
       )}
-      {isWorking && (
+      {(isWorking || isBreak) && (
         <ButtonBox onClick={stopHandler}>Stop</ButtonBox>
       )}
       {isStop && (
         <ButtonBox onClick={resumeHandler}>Resume</ButtonBox>
       )}
-      {/* {!isRunning && !isStop && (
-        <ButtonBox onClick={startHandler(START_SHORT_BREAK_MINUTES)} numMin = {START_SHORT_BREAK_MINUTES}>Start Short Break</ButtonBox>
-      )} */}
+
+      {!isBreak && (
+        <ButtonBox onClick={() => {startHandler(START_SHORT_BREAK_MINUTES)}}>Start Short Break</ButtonBox>
+      )}
+      {isBreak && (
+        <ButtonBox onClick={() => {startHandler(START_SHORT_BREAK_MINUTES)}}>Stop Short Break</ButtonBox>
+      )}
       </OuterButtonBox>
       <OuterButtonBox>
         <ButtonBox onClick={resetHandler} disabled={!isWorking&&!isStop}>Reset</ButtonBox> 
