@@ -1,5 +1,6 @@
 import {Page, Title, TimerBox, OuterButtonBox, ButtonBox} from "./HomeStyles";
 import React, {useState, useEffect, Fragment} from 'react';
+import { Button } from "@material-ui/core";
 
 const START_WORK_MINUTES = '25';
 const START_SHORT_BREAK_MINUTES = '5';
@@ -14,9 +15,10 @@ export default function Home () {
   const [duration, setDuration] = useState(START_DURATION);
   const [isRunning, setIsRunning] = useState(false);
 
-  const startHandler = () => {
-    // console.log("numMin: " + numMin);
-    let newDuration = parseInt(START_SECONDS,10) + 60 * parseInt(START_WORK_MINUTES,10); // problem?
+  const startHandler = (numMin) => {
+    console.log("numMin: " + {numMin}===START_WORK_MINUTES);
+    console.log("start work min" + START_WORK_MINUTES);
+    let newDuration = parseInt(START_SECONDS,10) + 60 * parseInt({numMin},10); // problem?
     setDuration(newDuration);
     // setMinutes(60 * 5);
     // setSeconds(0);
@@ -76,7 +78,8 @@ export default function Home () {
       <TimerBox>{currentMinutes}:{currentSeconds}</TimerBox>
       <OuterButtonBox>
       {!isRunning && !isStop && (
-        <ButtonBox onClick={startHandler}>Start Pomodoro</ButtonBox>
+        <ButtonBox onClick={() => {startHandler(START_WORK_MINUTES)}}>Start Pomodoro</ButtonBox>
+        // <ButtonBox onClick = {startHandler(START_WORK_MINUTES)}>Start Pomodoro</ButtonBox>
       )}
       {isRunning && (
         <ButtonBox onClick={stopHandler}>Stop</ButtonBox>
@@ -94,6 +97,5 @@ export default function Home () {
     </Fragment>
     </Page>
   </div>
-
   )
-}
+    }
