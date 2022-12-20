@@ -13,7 +13,8 @@ export default function Home () {
   const [currentSeconds, setSeconds] = useState(START_SECONDS);
   const [isStop, setIsStop] = useState(false);
   const [duration, setDuration] = useState(START_DURATION);
-  const [isRunning, setIsRunning] = useState(false);
+  const [isWorking, setIsWorking] = useState(false);
+  const [isBreak, setisBreak] = useState(false);
 
   const startHandler = (numMin) => {
     // console.log("numMin: " + parseInt(JSON.stringify(numMin),10));
@@ -22,20 +23,20 @@ export default function Home () {
     setDuration(newDuration);
     // setMinutes(60 * 5);
     // setSeconds(0);
-    setIsRunning(true);
+    setIsWorking(true);
   };
 
   const stopHandler = () => {
     // stop timer
     setIsStop(true);
-    setIsRunning(false);
+    setIsWorking(false);
   };
  
   const resetHandler = () => {
     // reset timers
     setMinutes(START_WORK_MINUTES); // TODO: change this
     setSeconds(START_SECONDS);
-    setIsRunning(false);
+    setIsWorking(false);
     setIsStop(false);
     setDuration(START_DURATION);
   };
@@ -44,12 +45,12 @@ export default function Home () {
     let newDuration = parseInt(currentMinutes, 10) * 60 + parseInt(currentSeconds, 10);
     setDuration(newDuration);
 
-    setIsRunning(true);
+    setIsWorking(true);
     setIsStop(false);
   }
 
   useEffect(() => {
-    if (isRunning === true) {
+    if (isWorking === true) {
       let timer = duration;
       var minutes, seconds;
       const interval = setInterval(function () {
@@ -68,7 +69,7 @@ export default function Home () {
       }, 1000);
       return () => clearInterval(interval);
     }
-  }, [isRunning]); // dependency -- only runs when dependency changes
+  }, [isWorking]); // dependency -- only runs when dependency changes
 
   return (
   <div>
@@ -77,11 +78,11 @@ export default function Home () {
       <Title>Pomodoro</Title>
       <TimerBox>{currentMinutes}:{currentSeconds}</TimerBox>
       <OuterButtonBox>
-      {!isRunning && !isStop && (
+      {!isWorking && !isStop && (
         <ButtonBox onClick={() => {startHandler(START_WORK_MINUTES)}}>Start Pomodoro</ButtonBox>
         // <ButtonBox onClick = {startHandler(START_WORK_MINUTES)}>Start Pomodoro</ButtonBox>
       )}
-      {isRunning && (
+      {isWorking && (
         <ButtonBox onClick={stopHandler}>Stop</ButtonBox>
       )}
       {isStop && (
@@ -92,7 +93,7 @@ export default function Home () {
       )} */}
       </OuterButtonBox>
       <OuterButtonBox>
-        <ButtonBox onClick={resetHandler} disabled={!isRunning&&!isStop}>Reset</ButtonBox> 
+        <ButtonBox onClick={resetHandler} disabled={!isWorking&&!isStop}>Reset</ButtonBox> 
       </OuterButtonBox>
     </Fragment>
     </Page>
