@@ -1,20 +1,20 @@
 import {Page, Title, TimerBox, OuterButtonBox, ButtonBox} from "./HomeStyles";
 import React, {useState, useEffect, Fragment} from 'react';
 
-const START_MINUTES = '25';
+const START_WORK_MINUTES = '25';
 const START_SECONDS = '00';
 const START_DURATION = 10;
 
 
 export default function Home () {
-  const [currentMinutes, setMinutes] = useState(START_MINUTES);
+  const [currentMinutes, setMinutes] = useState(START_WORK_MINUTES);
   const [currentSeconds, setSeconds] = useState(START_SECONDS);
   const [isStop, setIsStop] = useState(false);
   const [duration, setDuration] = useState(START_DURATION);
   const [isRunning, setIsRunning] = useState(false);
 
   const startHandler = () => {
-    let newDuration = parseInt(START_SECONDS,10) + 60 * parseInt(START_MINUTES,10);
+    let newDuration = parseInt(START_SECONDS,10) + 60 * parseInt(START_WORK_MINUTES,10);
     setDuration(newDuration);
     // setMinutes(60 * 5);
     // setSeconds(0);
@@ -29,7 +29,7 @@ export default function Home () {
  
   const resetHandler = () => {
     // reset timer
-    setMinutes(START_MINUTES);
+    setMinutes(START_WORK_MINUTES);
     setSeconds(START_SECONDS);
     setIsRunning(false);
     setIsStop(false);
@@ -82,9 +82,11 @@ export default function Home () {
       {isStop && (
         <ButtonBox onClick={resumeHandler}>Resume</ButtonBox>
       )}
-      <ButtonBox onClick={resetHandler} disabled={!isRunning&&!isStop}>Reset</ButtonBox> 
+      <ButtonBox>Start Short Break</ButtonBox>
       </OuterButtonBox>
-      
+      <OuterButtonBox>
+        <ButtonBox onClick={resetHandler} disabled={!isRunning&&!isStop}>Reset</ButtonBox> 
+      </OuterButtonBox>
     </Fragment>
     </Page>
   </div>

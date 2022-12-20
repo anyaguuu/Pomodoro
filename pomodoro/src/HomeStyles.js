@@ -51,4 +51,6 @@ export const ButtonBox = styled.button`
     height: 5vh;
     width: 15vw;
     margin-top: 2vh;
+    margin-left: 1vw;
+    margin-right: 1vw;
 `
