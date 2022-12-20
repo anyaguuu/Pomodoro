@@ -1,7 +1,7 @@
 import {Page, Title, TimerBox, ButtonBox} from "./HomeStyles";
 import React, {useState, useEffect, Fragment} from 'react';
 
-const START_MINUTES = '05';
+const START_MINUTES = '25';
 const START_SECONDS = '00';
 const START_DURATION = 10;
 
