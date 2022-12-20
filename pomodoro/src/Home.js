@@ -1,4 +1,4 @@
-import {Page, Title, TimerBox, OuterButtonBox} from "./HomeStyles";
+import {Page, Title, TimerBox, OuterButtonBox, ButtonBox} from "./HomeStyles";
 import React, {useState, useEffect, Fragment} from 'react';
 
 const START_MINUTES = '25';
@@ -72,17 +72,19 @@ export default function Home () {
     <Fragment>
       <Title>Pomodoro</Title>
       <TimerBox>{currentMinutes}:{currentSeconds}</TimerBox>
+      <OuterButtonBox>
       {!isRunning && !isStop && (
-        <OuterButtonBox onClick={startHandler}>Start Pomodoro</OuterButtonBox>
+        <ButtonBox onClick={startHandler}>Start Pomodoro</ButtonBox>
       )}
       {isRunning && (
-        <OuterButtonBox onClick={stopHandler}>Stop</OuterButtonBox>
+        <ButtonBox onClick={stopHandler}>Stop</ButtonBox>
       )}
       {isStop && (
-        <OuterButtonBox onClick={resumeHandler}>Resume</OuterButtonBox>
+        <ButtonBox onClick={resumeHandler}>Resume</ButtonBox>
       )}
-
-      <OuterButtonBox onClick={resetHandler} disabled={!isRunning&&!isStop}>Reset</OuterButtonBox> 
+      <ButtonBox onClick={resetHandler} disabled={!isRunning&&!isStop}>Reset</ButtonBox> 
+      </OuterButtonBox>
+      
     </Fragment>
     </Page>
   </div>

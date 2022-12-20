@@ -38,6 +38,9 @@ export const OuterButtonBox = styled(Box)({
     height: "10vh",
     width: "30vw",
     marginTop: "3vh",
+    justifyContent: "center",
+    alignItems: "center",
+    display: "flex"
 });
 
 export const ButtonBox = styled.button`
