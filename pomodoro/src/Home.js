@@ -15,7 +15,8 @@ export default function Home () {
   const [isRunning, setIsRunning] = useState(false);
 
   const startHandler = (props) => {
-    let numMin = props.numMin;
+    const numMin = props.numMin;
+    console.log("numMin: " + numMin);
     let newDuration = parseInt(START_SECONDS,10) + 60 * parseInt(numMin,10);
     setDuration(newDuration);
     // setMinutes(60 * 5);
