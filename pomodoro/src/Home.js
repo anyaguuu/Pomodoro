@@ -1,6 +1,6 @@
 import {Page, Title, TimerBox, OuterButtonBox, ButtonBox} from "./HomeStyles";
 import React, {useState, useEffect, Fragment} from 'react';
-import { Button } from "@material-ui/core";
+import { TextField} from "@material-ui/core";
 
 const START_WORK_MINUTES = '25';
 const START_SHORT_BREAK_MINUTES = '5';
@@ -23,8 +23,17 @@ export default function Home () {
     setDuration(newDuration);
     // setMinutes(60 * 5);
     // setSeconds(0);
-    setIsWorking(true);
-    setisBreak(false);
+    if (minInt == START_WORK_MINUTES) {
+      setIsWorking(true);
+      setisBreak(false);
+      setIsStop(false);
+    }
+    else { // break
+      setIsWorking(false);
+      setisBreak(true);
+      setIsStop(false);
+    }
+    
   };
 
   const stopHandler = () => {
@@ -105,7 +114,16 @@ export default function Home () {
       )}
       </OuterButtonBox>
       <OuterButtonBox>
-        <ButtonBox onClick={resetHandler} disabled={!isWorking&&!isStop&&!isBreak}>Reset</ButtonBox> 
+        <ButtonBox onClick={resetHandler} disabled={isStop || (!isWorking&&!isStop&&!isBreak)}>Reset</ButtonBox> 
+        <TextField 
+          id="outlined-basic" 
+          varient="outlined"
+          placeholder="name"
+        />
+      </OuterButtonBox>
+      <OuterButtonBox>
+        <TextField
+        placeholder="queried name"/>
       </OuterButtonBox>
     </Fragment>
     </Page>
