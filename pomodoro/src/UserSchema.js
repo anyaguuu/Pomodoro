@@ -7,5 +7,6 @@ const UserQuery = {
 const UserMutation = {
     userUpdateOne: UserTC.getResolver("updateOne"),
 }
+// default resolvers
 
 export { UserQuery, UserMutation };

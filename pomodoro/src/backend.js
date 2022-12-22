@@ -35,8 +35,8 @@
 
 let mongoose = require("mongoose");
 const uri = "mongodb+srv://anyagu:Sojenya135@cluster0.tiar473.mongodb.net/test";
-mongoose.connect(url);
+mongoose.connect(uri);
 
 mongoose.connection.on("connected", function() {
-    console.log("Mongoose connected to " + url);
+    console.log("Mongoose connected to " + uri);
 })

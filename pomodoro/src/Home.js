@@ -13,7 +13,7 @@ const START_DURATION = 10;
 export default function Home () {
 
   const UPDATE_USER = gql`
-    mutation updateUser(
+    mutation UpdateUser(
       $name: String!
       $gender: String!
     ) {
@@ -31,6 +31,12 @@ export default function Home () {
       }
     }
   `
+
+  // const [user, setUser] = useState({ // makes it wrong for some reason
+  //   name: user.name,
+  // })
+
+  const [updateUser] = useMutation(UPDATE_USER); // communicate w backend
 
   const [currentMinutes, setMinutes] = useState(START_WORK_MINUTES);
   const [currentSeconds, setSeconds] = useState(START_SECONDS);
