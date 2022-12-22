@@ -3,7 +3,7 @@ import { composeWithMongoose } from "graphql-compose-mongoose";
 var mongoose = require("mongoose"),
     Schema = mongoose.Schema;
 
-require("./backend");
+require("./db");
 
 var UserSchema = new Schema({
     name: {type: String},
