@@ -2,6 +2,8 @@ import {Page, Title, TimerBox, OuterButtonBox, ButtonBox} from "./HomeStyles";
 import React, {useState, useEffect, Fragment} from 'react';
 import { TextField} from "@material-ui/core";
 
+import {gql, useMutation} from "@apollo/client";
+
 const START_WORK_MINUTES = '25';
 const START_SHORT_BREAK_MINUTES = '5';
 const START_SECONDS = '00';
@@ -9,6 +11,27 @@ const START_DURATION = 10;
 
 
 export default function Home () {
+
+  const UPDATE_USER = gql`
+    mutation updateUser(
+      $name: String!
+      $gender: String!
+    ) {
+      userUpdateOne (
+        record: {
+          name: $name
+          gender: $gender
+        }
+      ) {
+        record {
+          _id
+          name
+          gender
+        }
+      }
+    }
+  `
+
   const [currentMinutes, setMinutes] = useState(START_WORK_MINUTES);
   const [currentSeconds, setSeconds] = useState(START_SECONDS);
   const [isStop, setIsStop] = useState(false);
