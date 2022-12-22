@@ -118,12 +118,12 @@ export default function Home () {
         <TextField 
           id="outlined-basic" 
           varient="outlined"
-          placeholder="name"
+          placeholder="user"
         />
       </OuterButtonBox>
       <OuterButtonBox>
         <TextField
-        placeholder="queried name"/>
+        placeholder="queried user"/>
       </OuterButtonBox>
     </Fragment>
     </Page>
