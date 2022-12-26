@@ -3,33 +3,33 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './Home';
 import reportWebVitals from './reportWebVitals';
-import { UserQuery, UserMutation } from './UserSchema';
-import { SchemaComposer } from 'graphql-compose';
+// import { UserQuery, UserMutation } from './UserSchema';
+// import { SchemaComposer } from 'graphql-compose';
 
 // import apollo client for graphql
-import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
+// import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 
-const schemaComposer = new SchemaComposer();
+// const schemaComposer = new SchemaComposer();
 
-schemaComposer.Query.addFields({
-  ...UserQuery,
-});
+// schemaComposer.Query.addFields({
+//   ...UserQuery,
+// });
 
-schemaComposer.Mutation.addFields({
-  ...UserMutation,
-});
+// schemaComposer.Mutation.addFields({
+//   ...UserMutation,
+// });
 
-const client = new ApolloClient({
-  cache: new InMemoryCache(),
-});
+// const client = new ApolloClient({
+//   cache: new InMemoryCache(),
+// });
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <ApolloProvider client={clearInterval}>
+  // <ApolloProvider client={clearInterval}>
   <React.StrictMode>
     <App />
   </React.StrictMode>
-  </ApolloProvider>
+  // </ApolloProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function
@@ -38,4 +38,4 @@ root.render(
 reportWebVitals();
 
 
-export const DbSchema = schemaComposer.buildSchema();
+// export const DbSchema = schemaComposer.buildSchema();
