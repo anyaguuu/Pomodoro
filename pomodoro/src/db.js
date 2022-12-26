@@ -33,7 +33,9 @@
 
 // main().catch(console.error);
 
-let mongoose = require("mongoose");
+import mongoose from 'mongoose/browser';
+
+// let mongoose = require("mongoose");
 const uri = "mongodb+srv://anyagu:Sojenya135@cluster0.tiar473.mongodb.net/test";
 mongoose.connect(uri);
 

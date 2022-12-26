@@ -2,7 +2,7 @@ import {Page, Title, TimerBox, OuterButtonBox, ButtonBox} from "./HomeStyles";
 import React, {useState, useEffect, Fragment} from 'react';
 import { TextField} from "@material-ui/core";
 
-import {gql, useMutation} from "@apollo/client";
+import {gql, useMutation, useQuery} from "@apollo/client";
 
 const START_WORK_MINUTES = '25';
 const START_SHORT_BREAK_MINUTES = '5';
@@ -11,6 +11,15 @@ const START_DURATION = 10;
 
 
 export default function Home () {
+
+  const GET_USER = gql`
+    query GetUserInfo {
+      userOne {
+        name
+        gender
+      }
+    }
+  `
 
   const UPDATE_USER = gql`
     mutation UpdateUser(
@@ -36,8 +45,6 @@ export default function Home () {
   //   name: user.name,
   // })
 
-  const [updateUser] = useMutation(UPDATE_USER); // communicate w backend
-
   const [currentMinutes, setMinutes] = useState(START_WORK_MINUTES);
   const [currentSeconds, setSeconds] = useState(START_SECONDS);
   const [isStop, setIsStop] = useState(false);
@@ -52,7 +59,7 @@ export default function Home () {
     setDuration(newDuration);
     // setMinutes(60 * 5);
     // setSeconds(0);
-    if (minInt == START_WORK_MINUTES) {
+    if (minInt === START_WORK_MINUTES) {
       setIsWorking(true);
       setisBreak(false);
       setIsStop(false);
@@ -116,8 +123,14 @@ export default function Home () {
       }, 1000);
       return () => clearInterval(interval);
     }
-  }, [isWorking,isBreak]); // dependency -- only runs when dependency changes
+  }, [isWorking,isBreak, duration]); // dependency -- only runs when dependency changes
 
+  //backend stuff
+  const [updateUser] = useMutation(UPDATE_USER); // communicate w backend
+  let {data, loading, error} = useQuery(GET_USER); // query
+
+  if (loading) return <p>LOADING</p>;
+  if (error) return `Error! ${error.message}`;
   return (
   <div>
     <Page>
