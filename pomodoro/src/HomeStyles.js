@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {Box,Button} from "@material-ui/core";
+import {Box} from "@material-ui/core";
 
 export const Page = styled.div`
     display: flex;
