@@ -1,1 +1,1 @@
-# Pomodoro
+# My Pomodoro App :)
