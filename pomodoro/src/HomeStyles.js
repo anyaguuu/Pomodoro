@@ -28,7 +28,7 @@ export const Page = styled.div`
 export const Title = styled.div`
   font-family: "Arial Black", sans-serif;
   color: #ffffff;
-  font-size: 4em;
+  font-size: 4em;racle
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
   margin-bottom: 1em;
 
