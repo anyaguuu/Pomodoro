@@ -44,7 +44,7 @@ export const TimerBox = styled(Box)`
   align-items: center;
   justify-content: center;
   background-color: rgba(255, 255, 255, 0.9);
-  border-radius: 8px;
+  border-radius: 15px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
   font-size: 6em;
 
@@ -68,7 +68,7 @@ export const ButtonBox = styled.button`
   font-family: "Arial", sans-serif;
   font-size: 1.8em;
   border: none;
-  border-radius: 4px;
+  border-radius: 20px;
   height: 4.5em;
   width: 14em;
   margin: 0 1em;
