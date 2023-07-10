@@ -47,7 +47,7 @@ export default function Home () {
     setIsStop(false);
   }
 
-  useEffect(() => { // TODO: prob have to change this part
+  useEffect(() => {
     if (isWorking === true) {
       let timer = duration;
       var minutes, seconds;
