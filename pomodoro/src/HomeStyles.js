@@ -31,6 +31,10 @@ export const Title = styled.div`
   font-size: 4em;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
   margin-bottom: 1em;
+
+  @media (max-width: 600px) {
+    font-size: 2.5em;
+  }
 `;
 
 export const TimerBox = styled(Box)`
@@ -43,6 +47,12 @@ export const TimerBox = styled(Box)`
   border-radius: 8px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
   font-size: 6em;
+
+  @media (max-width: 600px) {
+    height: 30vh;
+    width: 80vw;
+    font-size: 4em;
+  }
 `;
 
 export const OuterButtonBox = styled(Box)`
@@ -67,5 +77,11 @@ export const ButtonBox = styled.button`
 
   &:hover {
     background-color: #64c2d4;
+  }
+
+  @media (max-width: 600px) {
+    font-size: 1.5em;
+    height: 3.5em;
+    width: 10em;
   }
 `;
