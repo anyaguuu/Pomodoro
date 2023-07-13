@@ -3,7 +3,7 @@ import React, {useState, useEffect, Fragment} from 'react';
 // import { TextField} from "@material-ui/core";
 
 const START_WORK_MINUTES = '25';
-// const START_SHORT_BREAK_MINUTES = '5';
+const START_SHORT_BREAK_MINUTES = '5';
 const START_SECONDS = '00';
 const START_DURATION = 10;
 
